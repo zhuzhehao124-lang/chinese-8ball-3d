@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#0b0e14" />
   <link rel="manifest" href="./manifest.json" />
   <title>中式八球 PRO 3D · HEYBALL CHAMPIONSHIP</title>
-  <script type="module" crossorigin src="./assets/index-CTLLp90j.js"></script>
+  <script type="module" crossorigin src="./assets/index-Jx-DOHRF.js"></script>
   <link rel="stylesheet" crossorigin href="./assets/index-UcQqexht.css">
 </head>
 <body>
@@ -364,6 +364,31 @@
           <button class="seg-btn" data-guide="short">短线</button>
           <button class="seg-btn" data-guide="off">大师关闭</button>
         </div>
+      </div>
+      <div class="setting-group">
+        <label>球台潮湿度（电热除湿 / 湿度）</label>
+        <div class="seg-row" id="humidity-seg">
+          <button class="seg-btn" data-humidity="dry">干燥除湿 35%</button>
+          <button class="seg-btn active" data-humidity="normal">空调标准 50%</button>
+          <button class="seg-btn" data-humidity="humid">潮湿梅雨 75%</button>
+        </div>
+      </div>
+      <div class="setting-group">
+        <label>台呢摩擦（新旧台呢）</label>
+        <div class="seg-row" id="wear-seg">
+          <button class="seg-btn" data-wear="fast">全新快呢</button>
+          <button class="seg-btn active" data-wear="standard">标准精纺</button>
+          <button class="seg-btn" data-wear="heavy">旧呢涩台</button>
+        </div>
+      </div>
+      <div class="setting-group">
+        <label>台球干燥度（抛光 / 抛偏咬球）</label>
+        <div class="seg-row" id="dryness-seg">
+          <button class="seg-btn" data-dryness="polished">全新抛光干球</button>
+          <button class="seg-btn active" data-dryness="clean">标准干净球</button>
+          <button class="seg-btn" data-dryness="chalky">微潮沾粉球</button>
+        </div>
+        <div id="env-physics-readout" style="margin-top:6px;font-size:11.5px;color:#94a3b8;text-align:center;"></div>
       </div>
       <div class="setting-group">
         <label>渲染画质</label>
