@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#0b0e14" />
   <link rel="manifest" href="./manifest.json" />
   <title>中式八球 PRO 3D · HEYBALL CHAMPIONSHIP</title>
-  <script type="module" crossorigin src="./assets/index-ZmtucTdh.js"></script>
+  <script type="module" crossorigin src="./assets/index-Acrbfjsl.js"></script>
   <link rel="stylesheet" crossorigin href="./assets/index-UcQqexht.css">
 </head>
 <body>
@@ -51,10 +51,11 @@
         <button class="fmt-btn" data-variant="9ball">👑 9球追分</button>
       </div>
       <div class="format-selector">
-        <span>赛制：</span>
-        <button class="fmt-btn active" data-bo="1">单局决胜 (BO1)</button>
-        <button class="fmt-btn" data-bo="3">三局两胜 (BO3)</button>
-        <button class="fmt-btn" data-bo="5">五局三胜 (BO5)</button>
+        <span>局数/赛制：</span>
+        <button class="fmt-btn active" data-bo="1">1 局</button>
+        <button class="fmt-btn" data-bo="3">3 局</button>
+        <button class="fmt-btn" data-bo="5">5 局</button>
+        <button class="fmt-btn" data-bo="10">10 局</button>
       </div>
     </div>
 
@@ -122,7 +123,7 @@
         </div>
         <div class="status-line" id="status-line">开球回合 · 可直接击球</div>
         <div class="clock-row hidden" id="clock-row">
-          <span class="clock-text" id="clock-text">⏱ 30s</span>
+          <span class="clock-text" id="clock-text">⏱ 60s</span>
           <button class="ext-btn" id="ext-btn" title="本局可用 1 次 +15 秒加时">+15s</button>
         </div>
       </div>
@@ -289,11 +290,12 @@
           </div>
         </div>
         <div class="setting-group">
-          <label>房间赛制</label>
+          <label>局数 / 赛制</label>
           <div class="seg-row" id="online-bo-seg">
-            <button class="seg-btn active" data-obo="1">单局 BO1</button>
-            <button class="seg-btn" data-obo="3">三局两胜 BO3</button>
-            <button class="seg-btn" data-obo="5">五局三胜 BO5</button>
+            <button class="seg-btn active" data-obo="1">1 局</button>
+            <button class="seg-btn" data-obo="3">3 局</button>
+            <button class="seg-btn" data-obo="5">5 局</button>
+            <button class="seg-btn" data-obo="10">10 局</button>
           </div>
         </div>
         <div class="online-actions-row">
@@ -381,7 +383,7 @@
       <div class="rules-list">
         <div><strong>1. 极速操控</strong>：移动鼠标直接瞄准（不用点击），<strong>按住左键蓄力、松开出杆</strong>；蓄力中点右键取消，右键拖拽环绕视角，按 <code>L</code> 锁定瞄准线。</div>
         <div><strong>2. 开球与分球</strong>：有效开球需进球或至少 4 颗目标球碰库；开球后为开放球局，随后合法打进的第一颗球决定本方花色（<strong>全色 1-7</strong> 或 <strong>花色 9-15</strong>）。</div>
-        <div><strong>3. 犯规与自由球</strong>：白球落袋、空杆、先碰对方球/黑八、击球后无进球且无球碰库、或 30 秒超时均判犯规，对手获得全场自由球。</div>
+        <div><strong>3. 犯规与自由球</strong>：白球落袋、空杆、先碰对方球/黑八、击球后无进球且无球碰库、或 60 秒超时均判犯规，对手获得全场自由球。</div>
         <div><strong>4. 决胜黑八</strong>：清完本方 7 颗球后合法打进黑八即胜；提前误进黑八或打黑八时犯规直接判负。</div>
         <div><strong>5. 4 / 6 / 9 球追分模式（正宗 1-4-7-10 追分）</strong>：4球用 <code>1,2,3,9</code>、6球用 <code>1~5,9</code>、9球用 <code>1~9</code>，最后决胜球<strong>一律是 9 号球</strong>！每杆必须先击打当前最小号球；<strong>普胜/传进 9 号 +4 分</strong>、<strong>小金（接清）+7 分</strong>、<strong>黄金九（开球进9）+8 分</strong>、<strong>大金（开球炸清）+10 分</strong>；<strong>白球落袋或其他犯规罚 1 分（对手 +1 分）</strong>并送全场自由球，犯规误进 9 号球自动重置回置球点。</div>
         <div><strong>6. 进阶杆法</strong>：按住右键移动鼠标可实时调高/低杆与左右塞，按 <kbd>Esc</kbd> 呼出鼠标调抬杆角度（15°–35°）配左右塞可打出真实 3D 弧线绕球！</div>
