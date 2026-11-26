@@ -1,0 +1,10 @@
+{
+  "name": "中式八球 PRO 3D · HEYBALL CHAMPIONSHIP",
+  "short_name": "中式八球 3D",
+  "start_url": "./",
+  "display": "standalone",
+  "orientation": "landscape",
+  "background_color": "#07090d",
+  "theme_color": "#0e131a",
+  "description": "3A级画质3D中式八球台球游戏，支持真实物理加塞、弧线球与跨电脑实时双人联机对战"
+}

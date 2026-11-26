@@ -2,164 +2,283 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>3D 中式八球 · HEYBALL CHAMPIONSHIP</title>
-  <script type="module" crossorigin src="./assets/index-D_xJ_QhR.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-OjircZYx.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#0b0e14" />
+  <link rel="manifest" href="./manifest.json" />
+  <title>中式八球 PRO 3D · HEYBALL CHAMPIONSHIP</title>
+  <script type="module" crossorigin src="./assets/index-B7dTgSrO.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-CRL56k0V.css">
 </head>
 <body>
   <div id="canvas-container"></div>
 
-  <!-- Top Broadcast Scoreboard HUD -->
-  <header class="hud-top">
-    <div class="player-card active" id="p0-card">
-      <div class="player-header">
-        <span class="turn-dot"></span>
-        <span class="player-name" id="p0-name">玩家</span>
-        <span class="group-badge" id="p0-group">开放球局</span>
-        <span class="streak-badge hidden" id="p0-streak">🔥 连进 ×2</span>
+  <!-- ======================================================== -->
+  <!-- LUXURY COMMERCIAL GAME APP HOME LOBBY (over live 3D table) -->
+  <!-- ======================================================== -->
+  <div class="home-lobby" id="home-lobby">
+    <div class="lobby-topbar">
+      <div class="profile-pill" id="lobby-profile-pill">
+        <button class="avatar-btn" id="avatar-btn" title="点击切换头像">🎱</button>
+        <div class="profile-meta">
+          <div class="profile-name-row">
+            <input type="text" id="profile-name-input" maxlength="10" value="台球大师" title="点击修改昵称" />
+            <span class="rank-chip" id="lobby-rank-chip">🥈 白银球手 · 1200</span>
+          </div>
+          <div class="profile-sub">
+            <span id="lobby-coins">🪙 1,500</span>
+            <span>·</span>
+            <span id="lobby-winrate">生涯 0胜 0负</span>
+          </div>
+        </div>
       </div>
-      <div class="ball-tray" id="p0-balls"></div>
-    </div>
 
-    <div class="center-pill">
-      <div class="game-title">中式八球 <span>PRO 3D</span></div>
-      <div class="status-line" id="status-line">开球回合 · 可直接击球</div>
-    </div>
-
-    <div class="player-card right" id="p1-card">
-      <div class="player-header">
-        <span class="streak-badge hidden" id="p1-streak">🔥 连进 ×2</span>
-        <span class="group-badge" id="p1-group">开放球局</span>
-        <span class="player-name" id="p1-name">AI 对手</span>
-        <span class="turn-dot"></span>
+      <div class="lobby-nav-btns">
+        <button class="lobby-nav-btn" id="lobby-armory-btn">🎨 装备库</button>
+        <button class="lobby-nav-btn" id="lobby-stats-btn">📊 生涯数据</button>
+        <button class="lobby-nav-btn" id="lobby-rules-btn">📖 规则指南</button>
+        <button class="lobby-nav-btn" id="lobby-fs-btn">⛶ 全屏</button>
       </div>
-      <div class="ball-tray" id="p1-balls"></div>
     </div>
-  </header>
 
-  <!-- Practice Mode Pro Drill Bar -->
-  <div class="drill-bar hidden" id="drill-bar">
-    <span class="drill-tag">特训模式</span>
-    <button class="drill-btn active" data-drill="rack">标准开球</button>
-    <button class="drill-btn" data-drill="draw_follow">高低杆</button>
-    <button class="drill-btn" data-drill="masse_curve">弧线绕球</button>
-    <button class="drill-btn" data-drill="endgame">黑八残局</button>
-    <button class="drill-btn undo" id="undo-btn" title="恢复上一杆球型 (Z)">↺ 撤回 [Z]</button>
+    <div class="lobby-hero">
+      <div class="hero-badge">TOURNAMENT EDITION · 600HZ RIGID-BODY PHYSICS</div>
+      <h1 class="hero-title">中式八球 <span>PRO 3D</span></h1>
+      <div class="format-selector">
+        <span>赛制：</span>
+        <button class="fmt-btn active" data-bo="1">单局决胜 (BO1)</button>
+        <button class="fmt-btn" data-bo="3">三局两胜 (BO3)</button>
+        <button class="fmt-btn" data-bo="5">五局三胜 (BO5)</button>
+      </div>
+    </div>
+
+    <div class="mode-grid">
+      <div class="mode-card featured" id="card-ai">
+        <div class="mode-icon">🏆</div>
+        <div class="mode-title">排位人机赛</div>
+        <div class="mode-desc">智能 AI 走位解球 · 赢取段位分与金币</div>
+        <div class="mode-sub-pills" id="lobby-diff-pills">
+          <button class="sub-pill" data-ldiff="amateur">业余</button>
+          <button class="sub-pill active" data-ldiff="pro">职业</button>
+          <button class="sub-pill" data-ldiff="master">大师</button>
+        </div>
+        <button class="mode-cta" id="start-ai-btn">开始排位</button>
+      </div>
+
+      <div class="mode-card online-card" id="card-online">
+        <div class="mode-icon">🌐</div>
+        <div class="mode-title">跨电脑联机对战</div>
+        <div class="mode-desc">创建 4 位房间号 · 发链接给好友全球直连开黑</div>
+        <div class="mode-tag">WebRTC P2P + 实时语音级同步 + 聊天</div>
+        <button class="mode-cta cyan" id="start-online-btn">进入联机大厅</button>
+      </div>
+
+      <div class="mode-card" id="card-pvp">
+        <div class="mode-icon">👥</div>
+        <div class="mode-title">本地双人对战</div>
+        <div class="mode-desc">同屏轮流击球 · 完整中式八球赛制计分</div>
+        <div class="mode-tag">适合朋友线下切磋</div>
+        <button class="mode-cta dark" id="start-pvp-btn">开始双人对战</button>
+      </div>
+
+      <div class="mode-card" id="card-practice">
+        <div class="mode-icon">🎯</div>
+        <div class="mode-title">大师特训营</div>
+        <div class="mode-desc">4 套经典特训球型 · 无限撤回 [Z] & 智能推荐</div>
+        <div class="mode-tag">高低杆 · 弧线绕球 · 黑八清台</div>
+        <button class="mode-cta dark" id="start-practice-btn">进入特训</button>
+      </div>
+    </div>
   </div>
 
-  <!-- Quick Move Cue Ball Pill (visible during Break Shot so user can either shoot right away OR reposition!) -->
-  <button class="move-cue-pill hidden" id="move-cue-pill" title="在开球线后重新摆放白球 (M)">
-    ✋ 移动开球白球 [M]
-  </button>
+  <!-- ======================================================== -->
+  <!-- IN-GAME BROADCAST HUD (hidden while in Home Lobby)       -->
+  <!-- ======================================================== -->
+  <div class="ingame-hud hidden" id="ingame-hud">
+    <!-- Top Broadcast Scoreboard -->
+    <header class="hud-top">
+      <div class="player-card active" id="p0-card">
+        <div class="player-header">
+          <span class="turn-dot"></span>
+          <span class="player-name" id="p0-name">玩家</span>
+          <span class="group-badge" id="p0-group">开放球局</span>
+          <span class="streak-badge hidden" id="p0-streak">🔥 ×2</span>
+        </div>
+        <div class="ball-tray" id="p0-balls"></div>
+        <div class="clock-bar-wrap" id="p0-clock-wrap"><div class="clock-bar" id="p0-clock-bar"></div></div>
+      </div>
 
-  <!-- Slow-Mo Replay Broadcast Indicator -->
-  <div class="replay-badge hidden" id="replay-badge">
-    <span class="rec-dot"></span> SLOW-MO REPLAY · 0.45× <small>(Esc 退出)</small>
+      <div class="center-pill">
+        <div class="series-score-row">
+          <span class="frame-num" id="p0-frames">0</span>
+          <span class="series-tag" id="series-tag">BO1</span>
+          <span class="frame-num" id="p1-frames">0</span>
+        </div>
+        <div class="status-line" id="status-line">开球回合 · 可直接击球</div>
+        <div class="clock-row hidden" id="clock-row">
+          <span class="clock-text" id="clock-text">⏱ 30s</span>
+          <button class="ext-btn" id="ext-btn" title="本局可用 1 次 +15 秒加时">+15s</button>
+        </div>
+      </div>
+
+      <div class="player-card right" id="p1-card">
+        <div class="player-header">
+          <span class="streak-badge hidden" id="p1-streak">🔥 ×2</span>
+          <span class="group-badge" id="p1-group">开放球局</span>
+          <span class="player-name" id="p1-name">AI 对手</span>
+          <span class="turn-dot"></span>
+        </div>
+        <div class="ball-tray" id="p1-balls"></div>
+        <div class="clock-bar-wrap" id="p1-clock-wrap"><div class="clock-bar" id="p1-clock-bar"></div></div>
+      </div>
+    </header>
+
+    <!-- Practice Mode Pro Drill Bar -->
+    <div class="drill-bar hidden" id="drill-bar">
+      <span class="drill-tag">特训模式</span>
+      <button class="drill-btn active" data-drill="rack">标准开球</button>
+      <button class="drill-btn" data-drill="draw_follow">高低杆</button>
+      <button class="drill-btn" data-drill="masse_curve">弧线绕球</button>
+      <button class="drill-btn" data-drill="endgame">黑八残局</button>
+      <button class="drill-btn undo" id="undo-btn" title="恢复上一杆球型 (Z)">↺ 撤回 [Z]</button>
+    </div>
+
+    <!-- Online Match Bar + Live Chat Toggle -->
+    <div class="online-bar hidden" id="online-bar">
+      <span class="online-room-tag" id="online-room-tag">🟢 房间 0000</span>
+      <button class="emote-btn" data-emote="👏 好球！">👏</button>
+      <button class="emote-btn" data-emote="🔥 炸裂！">🔥</button>
+      <button class="emote-btn" data-emote="😅 手滑了">😅</button>
+      <button class="emote-btn" data-emote="👍 稳！">👍</button>
+      <button class="emote-btn chat-toggle" id="chat-toggle-btn">💬 聊天</button>
+      <button class="emote-btn leave" id="leave-online-btn">退出</button>
+    </div>
+
+    <!-- Collapsible Online Live Chat Drawer -->
+    <div class="chat-drawer hidden" id="chat-drawer">
+      <div class="chat-messages" id="chat-messages"></div>
+      <div class="chat-input-row">
+        <input type="text" id="chat-input" maxlength="50" placeholder="输入消息按回车发送..." />
+        <button id="chat-send-btn">发送</button>
+      </div>
+    </div>
+
+    <!-- Quick Move Cue Ball Pill -->
+    <button class="move-cue-pill hidden" id="move-cue-pill" title="在开球线后重新摆放白球 (M)">
+      ✋ 移动开球白球 [M]
+    </button>
+
+    <!-- Slow-Mo Replay Broadcast Indicator -->
+    <div class="replay-badge hidden" id="replay-badge">
+      <span class="rec-dot"></span> SLOW-MO REPLAY · 0.45× <small>(Esc 退出)</small>
+    </div>
+
+    <!-- Right-side Power Dock -->
+    <aside class="power-dock" id="power-dock">
+      <div class="power-label">力度</div>
+      <div class="power-track" id="power-track" title="向下拖动蓄力，松开击球（或直接按住左键）">
+        <div class="power-fill" id="power-fill"></div>
+        <div class="power-memory-tick hidden" id="power-memory-tick" title="上一杆力度"></div>
+        <div class="power-handle" id="power-handle"></div>
+      </div>
+      <div class="power-pct" id="power-pct">0%</div>
+      <div class="quick-powers">
+        <button class="qp-btn" data-qp="0.26" title="一键轻推">轻</button>
+        <button class="qp-btn" data-qp="0.52" title="一键中力">中</button>
+        <button class="qp-btn" data-qp="0.78" title="一键大力">大</button>
+        <button class="qp-btn hot" data-qp="0.96" title="一键爆力开球">爆</button>
+      </div>
+      <button class="cancel-shot-btn" id="cancel-shot-btn" title="取消蓄力 (Esc)">取消</button>
+    </aside>
+
+    <!-- Bottom-Left: Interactive Spin / English + Elevation Controller -->
+    <section class="spin-panel" id="spin-panel">
+      <div class="spin-header">
+        <span>打点 / 加塞</span>
+        <button class="mini-btn" id="reset-spin-btn" title="重置中杆 (R)">归中</button>
+      </div>
+      <div class="cue-ball-pad" id="cue-ball-pad">
+        <div class="crosshair-h"></div>
+        <div class="crosshair-v"></div>
+        <div class="spin-dot" id="spin-dot"></div>
+      </div>
+      <div class="spin-readout" id="spin-readout">中杆 (定杆)</div>
+      <div class="elev-row">
+        <span>抬杆</span>
+        <input type="range" id="elev-slider" min="0" max="35" step="1" value="0" />
+        <span id="elev-val">0°</span>
+      </div>
+    </section>
+
+    <!-- Fine-Aim Micro-Adjust Strip + Instant Tactical Assist -->
+    <div class="fine-aim-bar" id="fine-aim-bar">
+      <button class="assist-chip" id="hint-aim-btn" title="智能推荐最佳进球路线 (T)">🎯 推荐 [T]</button>
+      <button class="nudge-btn" id="nudge-left" title="向左微调 0.25°">◀</button>
+      <div class="fine-aim-track" id="fine-aim-track" title="左右拖动进行毫米级精瞄微调">
+        <span>↔ 精瞄微调</span>
+      </div>
+      <button class="nudge-btn" id="nudge-right" title="向右微调 0.25°">▶</button>
+      <button class="assist-chip" id="highlight-btn" title="高亮本方合法目标球 (H)">✨ 亮球 [H]</button>
+    </div>
+
+    <!-- Bottom-Center: Clean App Controls Bar -->
+    <footer class="hud-bottom">
+      <div class="control-group">
+        <button class="pill-btn" id="home-btn" title="返回游戏主大厅">🏠 大厅</button>
+      </div>
+      <div class="divider"></div>
+      <div class="control-group">
+        <button class="pill-btn active" data-cam="aim">瞄准 [1]</button>
+        <button class="pill-btn" data-cam="top">俯视 [2]</button>
+        <button class="pill-btn" data-cam="tv">转播 [3]</button>
+        <button class="pill-btn" data-cam="free">自由 [4]</button>
+      </div>
+      <div class="divider"></div>
+      <div class="control-group">
+        <button class="pill-btn online-btn" id="online-btn">🌐 联机</button>
+        <button class="pill-btn" id="replay-btn" title="慢动作重播上一杆 (V)">重播 [V]</button>
+        <button class="pill-btn" id="stats-btn" title="对局统计 (Tab)">数据</button>
+        <button class="pill-btn" id="settings-btn">外观</button>
+        <button class="pill-btn" id="mute-btn">🔊</button>
+        <button class="pill-btn" id="fs-btn" title="全屏切换">⛶</button>
+        <button class="pill-btn gold" id="restart-btn">重开</button>
+      </div>
+    </footer>
+
+    <!-- Bottom-Right: Compact Keybind Hint -->
+    <div class="hint-card" id="hint-card">
+      <div><kbd>移动鼠标</kbd> 直接瞄准 · <kbd>Shift</kbd> 精瞄</div>
+      <div><kbd>按住左键</kbd> 蓄力松开击球 · <kbd>右键</kbd> 取消/环绕</div>
+      <div><kbd>L</kbd> 锁定方向 · <kbd>V</kbd> 慢放 · <kbd>C</kbd> 擦巧粉</div>
+    </div>
   </div>
 
-  <!-- Floating Event Toast, Pro Callout Banner & Live Shot Speed Telemetry -->
+  <!-- Global Floating Banners (visible in both Lobby & In-Game) -->
   <div class="callout-banner" id="callout-banner"></div>
   <div class="toast-banner" id="toast-banner"></div>
   <div class="speed-pill hidden" id="speed-pill">球速 <span id="speed-val">0.0</span> km/h</div>
 
-  <!-- Right-side Effortless Power Dock: Drag Track + Last-Power Tick + 1-Click Quick Shot Presets -->
-  <aside class="power-dock" id="power-dock">
-    <div class="power-label">力度</div>
-    <div class="power-track" id="power-track" title="向下拖动蓄力，松开击球（或按住空格 / 拖白球）">
-      <div class="power-fill" id="power-fill"></div>
-      <div class="power-memory-tick hidden" id="power-memory-tick" title="上一杆力度"></div>
-      <div class="power-handle" id="power-handle"></div>
-    </div>
-    <div class="power-pct" id="power-pct">0%</div>
-    <div class="quick-powers">
-      <button class="qp-btn" data-qp="0.26" title="一键轻推">轻</button>
-      <button class="qp-btn" data-qp="0.52" title="一键中力">中</button>
-      <button class="qp-btn" data-qp="0.78" title="一键大力">大</button>
-      <button class="qp-btn hot" data-qp="0.96" title="一键爆力开球">爆</button>
-    </div>
-    <button class="cancel-shot-btn" id="cancel-shot-btn" title="取消蓄力 (Esc)">取消</button>
-  </aside>
-
-  <!-- Bottom-Left: Interactive Spin / English + Elevation Controller -->
-  <section class="spin-panel" id="spin-panel">
-    <div class="spin-header">
-      <span>打点 / 加塞</span>
-      <button class="mini-btn" id="reset-spin-btn" title="重置中杆 (R)">归中</button>
-    </div>
-    <div class="cue-ball-pad" id="cue-ball-pad">
-      <div class="crosshair-h"></div>
-      <div class="crosshair-v"></div>
-      <div class="spin-dot" id="spin-dot"></div>
-    </div>
-    <div class="spin-readout" id="spin-readout">中杆 (定杆)</div>
-    <div class="elev-row">
-      <span>抬杆</span>
-      <input type="range" id="elev-slider" min="0" max="35" step="1" value="0" />
-      <span id="elev-val">0°</span>
-    </div>
-  </section>
-
-  <!-- Fine-Aim Micro-Adjust Strip + Instant Tactical Assist -->
-  <div class="fine-aim-bar" id="fine-aim-bar">
-    <button class="assist-chip" id="hint-aim-btn" title="智能推荐最佳进球路线 (T)">🎯 推荐 [T]</button>
-    <button class="nudge-btn" id="nudge-left" title="向左微调 0.25°">◀</button>
-    <div class="fine-aim-track" id="fine-aim-track" title="左右拖动进行毫米级精瞄微调">
-      <span>↔ 精瞄微调</span>
-    </div>
-    <button class="nudge-btn" id="nudge-right" title="向右微调 0.25°">▶</button>
-    <button class="assist-chip" id="highlight-btn" title="高亮本方合法目标球 (H)">✨ 亮球 [H]</button>
-  </div>
-
-  <!-- Bottom-Center: Clean Controls Bar -->
-  <footer class="hud-bottom">
-    <div class="control-group">
-      <button class="pill-btn active" data-cam="aim">瞄准 [1]</button>
-      <button class="pill-btn" data-cam="top">俯视 [2]</button>
-      <button class="pill-btn" data-cam="tv">转播 [3]</button>
-      <button class="pill-btn" data-cam="free">自由 [4]</button>
-    </div>
-    <div class="divider"></div>
-    <div class="control-group">
-      <button class="pill-btn" id="mode-btn">人机对战</button>
-      <button class="pill-btn online-btn" id="online-btn" title="两台电脑局域网/在线双人实时对战">🌐 联机对战</button>
-      <button class="pill-btn" id="replay-btn" title="慢动作重播上一杆 (V)">重播 [V]</button>
-      <button class="pill-btn" id="stats-btn" title="对局统计 (Tab)">数据</button>
-      <button class="pill-btn" id="settings-btn" title="球台配色、球杆皮肤、AI难度与画质">外观 / 设置</button>
-      <button class="pill-btn" id="mute-btn">音效: 开</button>
-      <button class="pill-btn gold" id="restart-btn">重开</button>
-    </div>
-  </footer>
-
-  <!-- Bottom-Right: Compact Keybind Hint -->
-  <div class="hint-card" id="hint-card">
-    <div><kbd>移动鼠标</kbd> 直接瞄准 · <kbd>Shift</kbd> 精瞄</div>
-    <div><kbd>按住左键</kbd> 蓄力松开击球 · <kbd>右键</kbd> 取消/环绕</div>
-    <div><kbd>L</kbd> 锁定方向 · <kbd>V</kbd> 慢放 · <kbd>C</kbd> 擦巧粉</div>
-  </div>
-
-  <!-- Online Match Quick Emotes & Room Indicator (shown only during Online 2P match) -->
-  <div class="online-bar hidden" id="online-bar">
-    <span class="online-room-tag" id="online-room-tag">房间 0000</span>
-    <button class="emote-btn" data-emote="👏 好球！">👏</button>
-    <button class="emote-btn" data-emote="🔥 炸裂！">🔥</button>
-    <button class="emote-btn" data-emote="😅 手滑了">😅</button>
-    <button class="emote-btn" data-emote="👍 稳！">👍</button>
-    <button class="emote-btn leave" id="leave-online-btn">退出联机</button>
-  </div>
-
-  <!-- Online Multiplayer Lobby Modal -->
+  <!-- ======================================================== -->
+  <!-- MODALS: Online Lobby, Armory/Settings, Stats, Rules, End -->
+  <!-- ======================================================== -->
   <div class="modal-backdrop hidden" id="online-modal">
     <div class="modal-box online-box">
       <h2>🌐 双人跨电脑联机对战</h2>
-      <p class="online-sub">支持两台电脑同 Wi-Fi 局域网或公网实时对战，球杆瞄准与击球全程同步</p>
+      <p class="online-sub">支持全球公网 WebRTC P2P 直连 & 局域网秒连，实时同步瞄准、加塞、出杆与聊天</p>
 
       <div class="online-field">
         <label>你的昵称</label>
-        <input type="text" id="online-name-input" maxlength="10" placeholder="输入昵称（如：台球皇帝）" value="玩家" />
+        <input type="text" id="online-name-input" maxlength="10" placeholder="输入昵称" value="台球大师" />
       </div>
 
       <div id="online-lobby-view">
+        <div class="setting-group">
+          <label>房间赛制</label>
+          <div class="seg-row" id="online-bo-seg">
+            <button class="seg-btn active" data-obo="1">单局 BO1</button>
+            <button class="seg-btn" data-obo="3">三局两胜 BO3</button>
+            <button class="seg-btn" data-obo="5">五局三胜 BO5</button>
+          </div>
+        </div>
         <div class="online-actions-row">
           <button class="primary-btn full" id="create-room-btn">创建房间（当房主）</button>
         </div>
@@ -174,7 +293,7 @@
         <div class="room-code-card">
           <div class="rc-label">房间号（发给另一台电脑）</div>
           <div class="rc-number" id="waiting-room-code">----</div>
-          <div class="rc-link-box" id="invite-link-text">加载局域网地址中...</div>
+          <div class="rc-link-box" id="invite-link-text">生成邀请链接中...</div>
           <button class="primary-btn full" id="copy-invite-btn">📋 一键复制邀请链接</button>
         </div>
         <div class="waiting-pulse">等待对手加入房间...</div>
@@ -187,10 +306,10 @@
     </div>
   </div>
 
-  <!-- Settings & Customization Modal -->
+  <!-- Armory / Settings Modal -->
   <div class="modal-backdrop hidden" id="settings-modal">
     <div class="modal-box settings-box">
-      <h2>球房外观与设置</h2>
+      <h2>🎨 球房装备库与设置</h2>
       <div class="setting-group">
         <label>台呢配色</label>
         <div class="seg-row" id="cloth-seg">
@@ -200,11 +319,12 @@
         </div>
       </div>
       <div class="setting-group">
-        <label>球杆皮肤</label>
+        <label>3D 球杆皮肤</label>
         <div class="seg-row" id="cue-seg">
           <button class="seg-btn active" data-cue="maple">经典枫木</button>
           <button class="seg-btn" data-cue="carbon">碳纤维</button>
-          <button class="seg-btn" data-cue="royal">紫檀镶金</button>
+          <button class="seg-btn" data-cue="royal">紫檀金</button>
+          <button class="seg-btn" data-cue="aurora">极光钛</button>
         </div>
       </div>
       <div class="setting-group">
@@ -236,32 +356,50 @@
     </div>
   </div>
 
-  <!-- Match Stats & Career Profile Overlay (Tab) -->
+  <!-- Rules & Controls Guide Modal -->
+  <div class="modal-backdrop hidden" id="rules-modal">
+    <div class="modal-box rules-box">
+      <h2>📖 中式八球规则与操控指南</h2>
+      <div class="rules-list">
+        <div><strong>1. 极速操控</strong>：移动鼠标直接瞄准（不用点击），<strong>按住左键蓄力、松开出杆</strong>；蓄力中点右键取消，右键拖拽环绕视角，按 <code>L</code> 锁定瞄准线。</div>
+        <div><strong>2. 开球与分球</strong>：有效开球需进球或至少 4 颗目标球碰库；开球后为开放球局，随后合法打进的第一颗球决定本方花色（<strong>全色 1-7</strong> 或 <strong>花色 9-15</strong>）。</div>
+        <div><strong>3. 犯规与自由球</strong>：白球落袋、空杆、先碰对方球/黑八、击球后无进球且无球碰库、或 30 秒超时均判犯规，对手获得全场自由球。</div>
+        <div><strong>4. 决胜黑八</strong>：清完本方 7 颗球后合法打进黑八即胜；提前误进黑八或打黑八时犯规直接判负。</div>
+        <div><strong>5. 进阶杆法</strong>：左下角可调高/低杆与左右塞，拉高<strong>抬杆角度（15°–35°）</strong>配左右塞可打出真实 3D 弧线绕球！</div>
+      </div>
+      <div class="modal-actions">
+        <button class="primary-btn" id="rules-close-btn">明白了，开始打球！</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Match Stats & Career Profile Overlay -->
   <div class="modal-backdrop hidden" id="stats-modal">
     <div class="modal-box stats-box">
-      <h2>本局技术统计</h2>
+      <h2>📊 本局技术统计</h2>
       <div class="stats-table" id="stats-table"></div>
       <div class="career-section">
         <div class="career-title">🏆 个人生涯荣誉</div>
         <div class="career-grid" id="career-grid"></div>
       </div>
       <div class="modal-actions">
-        <button class="primary-btn" id="stats-close-btn">返回比赛</button>
+        <button class="primary-btn" id="stats-close-btn">返回</button>
       </div>
     </div>
   </div>
 
-  <!-- Game Over Modal -->
+  <!-- Frame / Match Over Modal -->
   <div class="modal-backdrop hidden" id="gameover-modal">
     <div class="modal-box">
-      <div class="modal-trophy">🏆</div>
+      <div class="modal-trophy" id="modal-trophy">🏆</div>
       <h2 id="modal-title">比赛结束</h2>
       <p id="modal-desc"></p>
+      <div class="reward-row hidden" id="reward-row"></div>
       <div class="stats-table compact" id="modal-stats"></div>
       <div class="modal-actions">
         <button class="primary-btn" id="modal-rematch-btn">再来一局</button>
         <button class="secondary-btn" id="modal-replay-btn">回看绝杀</button>
-        <button class="secondary-btn" id="modal-switch-btn">切换模式</button>
+        <button class="secondary-btn" id="modal-home-btn">返回大厅</button>
       </div>
     </div>
   </div>
