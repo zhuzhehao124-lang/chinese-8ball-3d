@@ -7,10 +7,10 @@
   <link rel="preload" as="fetch" crossorigin href="./assets/billiards-DSh3S_m9.wav" />
   <link rel="manifest" href="./manifest.json" />
   <title>中式八球 PRO 3D · HEYBALL CHAMPIONSHIP</title>
-  <script type="module" crossorigin src="./assets/index-Db8apowi.js"></script>
-  <link rel="modulepreload" crossorigin href="./assets/three-2t4XZKn1.js">
+  <script type="module" crossorigin src="./assets/index-BZXRzfkt.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/three-Dglkmq7l.js">
   <link rel="modulepreload" crossorigin href="./assets/peerjs-DMCxoq8V.js">
-  <link rel="stylesheet" crossorigin href="./assets/index-D9sJZT0i.css">
+  <link rel="stylesheet" crossorigin href="./assets/index-Dl71vce8.css">
 </head>
 <body>
   <div id="canvas-container"></div>
@@ -44,7 +44,7 @@
     </div>
 
     <div class="lobby-hero">
-      <div class="hero-badge">游戏版本 v1.0.9</div>
+      <div class="hero-badge">游戏版本 v1.0.10</div>
       <h1 class="hero-title">中式台球 <span>PRO 3D</span></h1>
       <div class="format-selector variant-selector" id="lobby-variant-selector">
         <span>玩法：</span>
@@ -189,6 +189,7 @@
 
     <!-- Right-side Power Dock -->
     <aside class="power-dock" id="power-dock">
+      <button class="mobile-panel-toggle" aria-expanded="false">力度</button>
       <div class="power-label">力度</div>
       <div class="power-track" id="power-track" title="向下拖动蓄力，松开击球（或直接按住左键）">
         <div class="power-fill" id="power-fill"></div>
@@ -207,6 +208,7 @@
 
     <!-- Bottom-Left: Interactive Spin / English + Elevation Controller -->
     <section class="spin-panel" id="spin-panel">
+      <button class="mobile-panel-toggle" aria-expanded="false">打点</button>
       <div class="spin-header">
         <span>打点 / 加塞</span>
         <button class="mini-btn" id="reset-spin-btn" title="重置中杆 (R)">归中</button>
@@ -242,10 +244,10 @@
       </div>
       <div class="divider"></div>
       <div class="control-group">
-        <button class="pill-btn active" data-cam="aim">瞄准 [1]</button>
-        <button class="pill-btn" data-cam="top">俯视 [2]</button>
-        <button class="pill-btn" data-cam="tv">转播 [3]</button>
-        <button class="pill-btn" data-cam="free">自由 [4]</button>
+        <button class="pill-btn active" data-cam="aim">瞄准<span class="camera-key"> [1]</span></button>
+        <button class="pill-btn" data-cam="top">俯视<span class="camera-key"> [2]</span></button>
+        <button class="pill-btn" data-cam="tv">转播<span class="camera-key"> [3]</span></button>
+        <button class="pill-btn" data-cam="free">自由<span class="camera-key"> [4]</span></button>
       </div>
       <div class="divider"></div>
       <div class="control-group">
